@@ -1,3 +1,6 @@
-let arr=[1,2,3];
-let result=arr.splice(1,1);
-console.log(arr,result);
+let test=/^[^+-\d]/
+let obj={tree:3,one:1,two:2};
+let a=666;
+for(i of '6'){
+  console.log(i);
+}
