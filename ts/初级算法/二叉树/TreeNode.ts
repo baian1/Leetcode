@@ -9,5 +9,17 @@ class TreeNode{
   }
 }
 export default TreeNode;
-let a=new TreeNode('sd');
-a.left=new TreeNode(2);
+
+function initTree(arr:any[]){
+  if(arr[0]===undefined){
+    return null;
+  }
+  let node=new TreeNode(arr[0]);
+  arr.shift();
+
+  if(arr)
+
+  return node;
+}
+
+let a=initTree([1,2,3]);
