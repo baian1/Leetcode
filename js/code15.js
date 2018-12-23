@@ -1,4 +1,10 @@
-console.log(parseInt(-2)>parseInt(-3));
+/**
+ * 1.将数组排序
+ * 2.确定开头的数字小于0
+ * 3.在后面的数字中寻找相等的
+ * 4.输出结果
+ */
+onsole.log(parseInt(-2)>parseInt(-3));
 
 function arrIsRepeat(oldarr,newarr) {
   let pattern=new RegExp(' '+newarr+' ');
