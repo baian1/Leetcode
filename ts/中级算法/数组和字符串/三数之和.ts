@@ -13,16 +13,18 @@ const isRepeat=function(newarr:number[],oldarr:number[]){
 /**
  * 
  * @param nums 
- * 1.确定第一个数
+ * 1.并对数组排序，确定第一个数
  * 2.在后面的数中寻找相等的数
- * 3.将获得的数与之前的比较，确定是否输入
- * 4.取下一个i，数字不变继续取下一个
+ * 3.取到相等的数字
+ * 4.start++，end--，保证nums中取到的数字是不同的
+ * 改进
+ * 1.取消了对比是否重复
  */
 const threeSum = function(nums:number[]) {
   if(nums.length<=2){
     return [];
   }
-  nums.sort((a,b)=>a-b);
+  nums.sort((a,b)=>a-b);//对数组进行排序
   let i=0;
   let arr:number[][]=[];
   while(nums[i]<=0){
@@ -43,7 +45,7 @@ const threeSum = function(nums:number[]) {
         }
         while(nums[end]===nums[end+1] && end>start){
           end--;
-        }
+        }//取到不同的nums[start]与nums[end]
       }
       if(result>0){
         end--;
@@ -52,7 +54,7 @@ const threeSum = function(nums:number[]) {
     i++;
     while(nums[i]===nums[i-1]){
       i++;
-    }
+    }//取到下一个不同的首位数字
   }
   return arr;
 };
