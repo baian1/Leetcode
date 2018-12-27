@@ -1,3 +1,8 @@
+/**
+ * 
+ * @param s 
+ * 使用正则来判断是否有重复字符
+ */
 const lengthOfLongestSubstring = function(s:string) {
   let str:string='';
   let i:number=0;
