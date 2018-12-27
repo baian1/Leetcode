@@ -1,7 +1,7 @@
 /**
  * @param {string} s
  * @return {string}
- * 使用动态规划解法
+ * 使用中心扩展算法
  */
 const longestPalindrome = function(s:string):string {
   let i:number;
