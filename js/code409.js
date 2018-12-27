@@ -1,3 +1,11 @@
+/**
+ * 
+ * @param {string} s
+ * 1.统计所有字母个数
+ * 2.相加所有字母个数，减去齐数部分 
+ * 3.奇数如果是一个，能放在中间不用减，其他时候要减
+ * 
+ */
 var longestPalindrome = function(s) {
     let str={};
     let num=0;
