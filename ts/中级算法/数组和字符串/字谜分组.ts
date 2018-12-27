@@ -2,7 +2,9 @@
  * 
  * @param {string[]} strs
  * @return {string[][]}
- * 1.先将其排序后，再与已有字符进行对比
+ * 1.先将其排序后，再与已有字符进行对比，用hashMap来存储
+ * 2.存在就添加到合适的数组内
+ * 3.不存在就新建一个数组
  */
 const groupAnagrams = function(strs:string[]):string[][] {
   let hashMap:{[index: string]:number}={};
