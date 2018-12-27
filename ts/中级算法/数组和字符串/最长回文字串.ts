@@ -5,35 +5,34 @@
  */
 const longestPalindrome = function(s:string):string {
   let i:number;
-  let res:string='';
+  let start:number=0;
+  let end:number=0;
   for(i=0;i<s.length;i++){
-    let start=i;
-    let end=start+1;
-    let current1='';
-    let current2=s[start];
-    while(s[start]===s[end]){
-      if(start===-1||end===s.length){
-        break;
+
+    let length1=expandAroundCenter(s,i,i);
+    let length2=expandAroundCenter(s,i,i+1);
+    let length=Math.max(length1,length2);
+    if(length>end-start){
+      if(length%2===0){
+        start=i-length/2+1;
+        end=i+length/2
       }
-      current1=s[start]+current1+s[end];
-      start--;
-      end++;
-    }
-    start=i;
-    end=start+1;
-    while(s[start-1]===s[end]){
-      if(start-1===-1||end===s.length){
-        break;
+      else{
+        start=i-Math.floor(length/2);
+        end=i+Math.floor(length/2);
       }
-      current2=s[start-1]+current2+s[end];
-      start--;
-      end++;
     }
-    let current=current1.length>current2.length?current1:current2;
-    res=res.length>current.length?res:current;
   }
-  return res;
+  return s.slice(start,end+1);
 };
 
-const s3="a";
+const expandAroundCenter = function(s:string,start:number,end:number){
+  while(s[start]===s[end] && start>=0 && end<=s.length-1){
+    start--;
+    end++;
+  }
+  return end-start+1-2;
+}
+
+const s3="babad";
 console.log(longestPalindrome(s3));
