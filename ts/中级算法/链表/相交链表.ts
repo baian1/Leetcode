@@ -23,16 +23,22 @@ const skipA=2;
 const skipB=3;
 
 const [headA,headB]=initjiao(intersectVal,listA,listB,skipA,skipB)
-
+/**
+ * 
+ * @param headA 
+ * @param headB 
+ * 使用两个指针，每个指针循环两个链表，
+ * 因为两个链表有长短链，所以指针指向的内存相等时就是重合点
+ */
 const getIntersectionNode = function(headA:ListNode, headB:ListNode) {
-  let current1=headA;
-  let current2=headB;
+  let current1:ListNode|null=headA;
+  let current2:ListNode|null=headB;
   if(current1===null||current2===null){
     return null;
   }
   while(current1!==current2){
-    current1=current1.next===null?headB:current1.next;
-    current2=current2.next===null?headA:current2.next;
+    current1=current1===null?headB:current1.next;
+    current2=current2===null?headA:current2.next;
   }
   return current1;
 };
