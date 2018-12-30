@@ -5,37 +5,24 @@
  */
 const generateParenthesis = function(n:number) {
   let list:string[]=[];
-  let zhan:string[]=[];
-  let timer={
-    left:0,
-    right:0,
-    max:n
-  }//记录括号个数
-  const getKuohao=function(n:number){
-    if(n===0){//达成条件
-      list.push(zhan.join(''));
-      return;
-    }
-    if(timer.left<timer.right){//限制条件
-      return;
-    }
+  let str:string='';
 
-    if(timer.left<timer.max){
-      zhan.push('(');
-      timer.left++;
-      getKuohao(n-1);
-      zhan.pop();
-      timer.left--;
+  const getKuohao=function(left:number,right:number,str:string){
+    if(right<left){
+      return;
     }
-    if(timer.right<timer.max){
-      zhan.push(')');
-      timer.right++;
-      getKuohao(n-1);
-      zhan.pop();
-      timer.right--;
-    }//进行遍历
+    if(left===0 && right===0){
+      list.push(str);
+    }else{
+      if(left>0){
+        getKuohao(left-1,right,str+'(');
+      }
+      if(right>0){
+        getKuohao(left,right-1,str+')');
+      }
+    }
   }
-  getKuohao(n*2);
+  getKuohao(n,n,str);
   return list;
 };
 
