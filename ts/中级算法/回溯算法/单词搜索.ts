@@ -8,13 +8,14 @@ const word="ab";
  * @param board 
  * @param word 
  * 1.优化为直接返回布尔值，减少判断
+ * 2.优化语句加快运行速度
  */
 const exist = function(board:(string|null)[][], word:string) {
   let fangxiang=[[0,1],[0,-1],[1,0],[-1,0]];
 
   const maxHang=board.length;
   const maxLie=board[0].length;
-  const find=function(hang:number,lie:number,wordIndex:number){
+  const find=function(hang:number,lie:number,wordIndex:number):boolean {
     if(hang<0 || hang===maxHang || lie<0 || lie===maxLie || board[hang][lie]!==word[wordIndex]){
       return false;
     }
@@ -25,9 +26,10 @@ const exist = function(board:(string|null)[][], word:string) {
       return true;
     }
 
-    let res=fangxiang.some(([a,b])=>{
-      return find(hang+a,lie+b,wordIndex+1);
-    });
+    let res:boolean=find(hang+1,lie,wordIndex+1)||
+    find(hang-1,lie,wordIndex+1)||
+    find(hang,lie+1,wordIndex+1)||
+    find(hang,lie-1,wordIndex+1);
 
     board[hang][lie]=word[wordIndex];
     return res;
