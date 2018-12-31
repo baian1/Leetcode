@@ -1,26 +1,26 @@
+/**
+ * 
+ * @param nums 
+ */
 const subsets = function(nums:number[]) {
   let list:number[][]=[];
-  let isUsed:boolean[]=Array(nums.length).fill(true);
   let current:number[]=[];
-  const getlist=function(nums:number[],n:number){
-    if(n===-1){
+  const getlist=function(nums:number[],start:number,end:number){
+    if(start===end){
       list.push([...current]);
       return;
     }
 
-    if(isUsed[n]){
-      current.push(nums[n]);
-      getlist(nums,n-1);
-      isUsed[n]=false;
-      current.pop();
-    }
-    if(!isUsed[n]){
-      getlist(nums,n-1);
-      isUsed[n]=true;
-    }
-
+    current.push(nums[start]);
+    getlist(nums,start+1,end);
+    current.pop();
+  
+    getlist(nums,start+1,end);
   }
-  getlist(nums,nums.length-1);
+  getlist(nums,0,nums.length);
 };
 
-subsets([1,2,3]);
+const start1:any=new Date();
+subsets([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]);
+const end1:any=new Date();
+console.log(end1-start1);
