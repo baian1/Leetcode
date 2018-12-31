@@ -1,3 +1,10 @@
+/**
+ * 
+ * @param nums 
+ * 设置一个数组isUsed，表示那个位置的数有没有被使用过
+ * 遍历数组，遇到没有被使用过的数，使用它
+ * 当current存储数组满时添加它
+ */
 const permute = function(nums:number[]) {
   let isUsed=Array(nums.length).fill(false);
   let list:number[][]=[];
@@ -21,5 +28,8 @@ const permute = function(nums:number[]) {
   getlist(nums,current);
   return list;
 };
-const nums6=[1,2,3];
+const nums6=[1,2,3,4,5,6,7,8,9,10];
+let star:any=new Date();
 permute(nums6);
+let end:any=new Date();
+console.log(end-star);
