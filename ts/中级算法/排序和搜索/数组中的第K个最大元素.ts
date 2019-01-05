@@ -2,32 +2,40 @@
  * @param {number[]} nums
  * @param {number} k
  * @return {number}
- * 每次找出最大的元素
+ * 快排写法，找到K位置就返回
  */
-const findKthLargest = function(nums:number[], k:number):number {
-  let arr=Array(nums.length).fill(true);
-  let maxState:number=0;
-  let res:number=0;
-  while(k){
-    for(let i=0;i<nums.length;i++){
-      if(arr[i]){
-        if(nums[i]>nums[maxState]){
-          maxState=i;
-        }
+const findKthLargest = function (nums: number[], k: number): number {
+  let state = 0;
+  const findSort = function (nums: number[], left: number, right: number, k: number) {
+    let i = left;
+    let j = right;
+    let current = nums[i];
+    while (i < j) {
+      while (current >= nums[j] && i < j) {
+        j--;
       }
+      nums[i] = nums[j];
+      while (current <= nums[i] && i < j) {
+        i++;
+      }
+      nums[j] = nums[i];
     }
-    arr[maxState]=false;
-    res=nums[maxState];
-    maxState=0;
-    while(arr[maxState]===false){
-      maxState++;
+    nums[i] = current;
+    if (i === k) {
+      state = current;
+      return;
     }
-    k--;
+    if (i > k) {
+      findSort(nums, left, i - 1, k);
+    } else {
+      findSort(nums, i + 1, right, k);
+    }//判断在哪个区间就去哪寻找
   }
-  return res;
+  findSort(nums, 0, nums.length - 1, k - 1);
+  return state;
 };
 
-const nums4=[3,2,3,1,2,4,5,5,6];
-const k2=4;
+const nums4 = [3, 2, 3, 1, 2, 4, 5, 5, 6];
+const k2 = 4;
 
-findKthLargest(nums4,k2);
+findKthLargest(nums4, k2);
