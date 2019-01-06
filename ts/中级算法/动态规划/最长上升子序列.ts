@@ -1,6 +1,8 @@
 /**
  * @param {number[]} nums
  * @return {number}
+ * 从第一个开始，然后长度逐渐增加0-1,0-2,0-3
+ * 每次判断出增加的那个的最大子序列长度
  */
 var lengthOfLIS = function(nums:number[]):number {
   let times=Array(nums.length).fill(1);
