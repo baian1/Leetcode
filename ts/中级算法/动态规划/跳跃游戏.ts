@@ -1,25 +1,28 @@
 /**
  * @param {number[]} nums
  * @return {boolean}
- * 获得所有能跳到的可能进行判断
+ * 使用数组记录每个位置所能到达的最大位置
  */
 const canJump = function(nums:number[]):boolean {
   let Max=nums.length-1;
-  let arr=Array(Max+nums[Max]).fill(false);
-  arr[0]=true;
-  for(let i=0;i<nums.length;i++){
-    if(arr[i]){
-      let current=nums[i];
-      while(current){
-        arr[i+current]=true;
-        current--;
-      }
-    }
-    if(arr[nums.length-1]===true){
+  if(Max===0){
+    return true;
+  }
+  let arr=Array(Max).fill(0);
+  arr[0]=nums[0];
+  if(arr[0]===0){
+    return false;
+  }
+  for(let i=1;i<nums.length;i++){
+    arr[i]=arr[i-1]>nums[i]+i?arr[i-1]:nums[i]+i;//比较这个点和前一个点能到的最大位置，取大的
+    if(arr[i]>=Max){
       return true;
-    }
+    }//能到达尾巴
+    if(arr[i]===i){
+      return false;
+    }//停滞不前了
   }
   return false;
 };
 
-canJump([2,3,1,1,4]);
+canJump([2,0,0]);
