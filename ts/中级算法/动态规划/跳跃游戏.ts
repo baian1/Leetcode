@@ -7,7 +7,7 @@ const canJump = function(nums:number[]):boolean {
   let length=nums.length;
   for(let i=0;i<length-1;i++){
     if(nums[i]===0){
-      let j=i;
+      let j=i-1;
       while(j>=0){
         if(nums[j]+j>i){
           break;
