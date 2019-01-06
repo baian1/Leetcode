@@ -1,6 +1,7 @@
 /**
  * @param {number[]} nums
  * @return {boolean}
+ * 获得所有能跳到的可能进行判断
  */
 const canJump = function(nums:number[]):boolean {
   let Max=nums.length-1;
