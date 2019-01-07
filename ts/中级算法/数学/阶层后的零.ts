@@ -8,17 +8,20 @@
  * 先被5除，拿出3个
  * 再被25除，拿出2个
  * 再被125除，拿出1个
+ * 
+ * 优化:
+ * 1.将上述过程优化
+ * 2.取出n中5的个数后
+ * 3.再取出n中25的个数
+ * 4.再取出125的个数
+ * 5.直到没有为止
  */
 const trailingZeroes = function(n:number):number {
   let count=0;
-  let i=1; 
-  while(Math.pow(5,i)<=n){
-    i++;
-  }
-  i=i-1;
-  while(i>0){
-    count+=Math.floor(n/Math.pow(5,i));
-    i--;
+  
+  while(n>0){
+    n=Math.floor(n/5);
+    count+=n;
   }
   return count;
 };
