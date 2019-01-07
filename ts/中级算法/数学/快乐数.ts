@@ -1,6 +1,7 @@
 /**
  * @param {number} n
  * @return {boolean}
+ * 快乐书有个死循环，是4开始的，判断遇到4就退出
  */
 const isHappy = function(n:number):boolean {
   let current=0;
