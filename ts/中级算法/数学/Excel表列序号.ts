@@ -3,6 +3,10 @@
  * @return {number}
  * 通过建立字典查询对应数字
  * 遍历字符计算
+ * 
+ * 优化
+ * 1.对于位的数字，直接*26往上
+ * 2.字典可以舍去，直接操作
  */
 
 var titleToNumber = function(s:string):number {
@@ -16,11 +20,10 @@ var titleToNumber = function(s:string):number {
   }
   const map=initMap();
   let sum=0;//统计和
-  let wei=0;//判断是在那个位置，需要23^wei
+  let current=1;
   for(let i=s.length-1;i>=0;i--){
-    let current=Math.pow(26,wei);
-    sum+=current*map[s[i]];
-    wei++;
+    sum+=current*(s[i].charCodeAt(0)-64);
+    current*=26;
   }
   return sum;
 };
