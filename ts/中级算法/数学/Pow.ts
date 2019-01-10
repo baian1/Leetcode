@@ -3,35 +3,26 @@
  * @param {number} n
  * @return {number}
  * 一个个慢慢乘上去
+ * 优化
+ * 1.分成两部分相乘，可以明显减少运算量
+ * 比如5^64成为5^32*5^32可以减少一半运算量
  */
 const myPow = function(x:number, n:number):number {
   if(n===0){
     return 1;
   }
-  if(x===1){
-    return 1;
+  if(n===1){
+    return x;
   }
-  if(x===-1){
-    if(n%2===0){
-      return 1;
-    }
-    return -1;
+  if(n<0){
+    return 1/myPow(x,-n)
   }
-  let res=x;
-  if(n>0){
-    n--;
-    while(n>0){
-      res=res*x;
-      n--;
-    }
-    return res;
+  let res:number=x;
+  let cur=myPow(x,Math.floor(n/2));
+  if(n%2===0){
+    return cur*cur;
   }else{
-    n++;
-    while(n<0){
-      res=res*x;
-      n++;
-    }
-    return 1/res;
+    return res*cur*cur;
   }
 };
 export {myPow};
