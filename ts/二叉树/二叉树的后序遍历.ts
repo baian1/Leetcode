@@ -57,4 +57,32 @@ var postorderTraversal2 = function (root: TreeNode) {
   return arr;
 };
 
-export { postorderTraversal2 as postorderTraversal };
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ * 使用一个标识位记录是否是已经查询过右节点的根结点
+ */
+var postorderTraversal3 = function (root: TreeNode) {
+  let arr: (number | string)[] = [];
+  let list: TreeNode[] = [];
+  let node: TreeNode | null = root;
+  let last: TreeNode | null = null;//标志位记录
+  while (node || list.length !== 0) {
+    while (node) {
+      list.push(node);
+      node = node.left;
+    }
+    node = list[list.length - 1];//向左查询的最后一个结点，表示当前结点
+    if (node.right === null || node.right === last) {
+      arr.push(node.value);
+      list.pop();
+      last = node;//用来记录右节点会不会被查询过
+      node = null;
+    } else {
+      node = node.right;//如果有右节点存在，并且没被查询过，那就转向查右子树
+    }
+  }
+  return arr;
+};
+
+export { postorderTraversal3 as postorderTraversal };
