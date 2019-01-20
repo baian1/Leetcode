@@ -5,22 +5,22 @@
  * 优化:
  * 摩尔投票法
  */
-var majorityElement = function(nums:number[]):number {
-  let major:number=0;
-  let count:number=0;
-  for(let i of nums){
-    if(count===0){
-      major=i;
+var majorityElement = function (nums: number[]): number {
+  let major: number = 0;
+  let count: number = 0;
+  for (let i of nums) {
+    if (count === 0) {
+      major = i;
       count++;
       continue;
     }
-    if(major!==i){
+    if (major !== i) {
       count--;
-    }else{
+    } else {
       count++;
     }
   }
   return major;
 };
 
-export {majorityElement};
+export { majorityElement };
