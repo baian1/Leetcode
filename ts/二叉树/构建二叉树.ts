@@ -2,10 +2,12 @@ class TreeNode {
   value: string | number;
   left: TreeNode | null;
   right: TreeNode | null;
+  next: TreeNode | null;
   constructor(value: string | number) {
     this.value = value;
     this.left = null;
     this.right = null;
+    this.next = null;
   }
 }
 
