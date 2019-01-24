@@ -15,9 +15,16 @@ import { TreeNode } from "./构建二叉树";
  * 递归写法，不断寻找结点，找到后就返回结点，表示已经找到了
  * 当一个根节点的左右标识位都是找到的时候，这个根结点就是最近的祖先结点
  * 
+ * 缺点:1.如果左树是根结点，会将所有右树节点都遍历一遍，往上走还有遍历更多
+ * 
+ * 优化:改进缺点1，设置一个标识位，来表示是否找到了结点，使用status标识
  */
 var lowestCommonAncestor = function (root: TreeNode, p: TreeNode, q: TreeNode) {
+  let status=false;
   const dfs = function (root: TreeNode | null, p: TreeNode, q: TreeNode): TreeNode | null {
+    if(status){
+      return null;
+    }
     if (root === null) {
       return null;
     }//没找到结点就返回null
