@@ -50,6 +50,8 @@ var serialize = function (root: TreeNode | null): string {
  * 1.先将字符串转换为结点的数组
  * 2.开始遍历结点数组
  * 3.返回根结点
+ * 
+ * 优化:使用两个指针，未添加左右结点指针cur，未有根结点的指针notHaveRoot
  */
 var deserialize = function (data: string): TreeNode | null {
   if (data === '[]') {
@@ -65,39 +67,18 @@ var deserialize = function (data: string): TreeNode | null {
       return null;
     }
   });//将数字转为节点
-
-  let cur = 1;//标识当前层结点个数，和sum相加为下一层结点的起始位置
-  let sum = 0;//标识这一层结点的起始位置
-  let i = 0;//用来遍历当前层的指针
-  let nextIndexStart = cur + sum;//用来表示还未被指向的结点位置，从1开始的，因为0是根结点
-  let nextCur = 0;//一层中有些结点会是null，这些结点在下层没有子节点，用nextCur表示下一层结点个数
-
-  while (nextIndexStart < list.length) {//判断是否还有结点，没有被指向
-    let node = list[sum + i];//遍历结点
-    if (node === null) {
-      i++;//为null结点就直接跳过
-    } else {
-
-      node.left = list[nextIndexStart];//TreeNode结点,添加其左右结点
-      nextIndexStart++;//每次一个结点被指向，指针向下移动一位
-      if (nextIndexStart === list.length) {
-        break;
-      }//表示所有结点都已经被指向了，可以返回根结点
-      node.right = list[nextIndexStart];
-      if (nextIndexStart === list.length) {
-        break;
-      }
-      nextIndexStart++;
-
-      nextCur += 2;//记录下一层的结点个数，多了两个
-      i++;//遍历下一个结点
+  let cur = 0;//未添加左右结点指针
+  let notHaveRoot = 1;//未有根结点的指针
+  const length = list.length;
+  while (notHaveRoot < length) {//不断给cur指针添加左右结点，直到所有结点都有根
+    let node = list[cur];
+    if (node !== null) {
+      node.left = list[notHaveRoot];
+      notHaveRoot++;
+      node.right = list[notHaveRoot];
+      notHaveRoot++;
     }
-
-    if (i === cur) {//这层遍历结束，开始遍历下一层
-      sum += cur;
-      cur = nextCur;
-      i = 0;
-    }
+    cur++;
   }
 
   return list[0];
