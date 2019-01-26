@@ -49,4 +49,4 @@ var inorderTraversal2 = function (root: TreeNode) {
   return arr;
 };
 
-export { inorderTraversal2 as inorderTraversal };
+export { inorderTraversal };
