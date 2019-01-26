@@ -12,25 +12,19 @@ import { TreeNode } from "../二叉树/构建二叉树";
  * @return {boolean}
  */
 var isValidBST = function (root: TreeNode | null): boolean {
-  let status = true;
-  let list: number[] = [];
-  const dfs = function (root: TreeNode | null): void {
-    if (root === null) {
-      return;
+  const dfs = function (root: TreeNode | null,min:number|null,max:number|null):boolean {
+    if(root===null){
+      return true;
     }
-    if (status) {
-      dfs(root.left);
-      list.push(<number>root.value);
-      if (list.length > 1) {
-        if (list[list.length - 2] > list[list.length - 1]) {
-          status = false;
-        }
-      }
-      dfs(root.right);
+    if(min!==null && root.value<=min){
+      return false;
     }
+    if(max!==null && root.value>=max){
+      return false;
+    }
+    return dfs(root.left,min,<number>root.value) && dfs(root.right,<number>root.value,max);
   }
-  dfs(root);
-  return status;
+  return dfs(root,null,null);
 };
 
 export { isValidBST };
