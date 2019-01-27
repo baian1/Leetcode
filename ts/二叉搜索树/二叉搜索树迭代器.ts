@@ -21,7 +21,6 @@ class BSTIterator {
   constructor(root:TreeNode){
     this.list=[];
     this.add(root);
-    this.start=0;
   }
 
   add(node:TreeNode|null){
