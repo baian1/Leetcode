@@ -48,6 +48,7 @@ var insertIntoBST = function (root: TreeNode | null, val: number):TreeNode {
     if(node.value>val){
       if(node.left===null){
         node.left=new TreeNode(val);
+        break;
       }else{
         node=node.left;
       }
@@ -55,6 +56,7 @@ var insertIntoBST = function (root: TreeNode | null, val: number):TreeNode {
     if(node.value<val){
       if(node.right===null){
         node.right=new TreeNode(val);
+        break;
       }else{
         node=node.right;
       }
