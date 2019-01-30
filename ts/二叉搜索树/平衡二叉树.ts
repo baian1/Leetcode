@@ -37,27 +37,12 @@ var isBalanced = function (root: TreeNode | null) {
 /**
  * @param {TreeNode} root
  * @return {boolean}
+ * log2(b)=h有点疑问，改用斐波数列判断
  * 通过平衡二叉树的高度和节点数关系进行判断
+ * 如果是平衡二叉树，这个符合
+ * 如果不是平衡二叉树，这个也有可能符合
+ * 
+ * 用这种判别条件失效了
  */
-var isBalanced2 = function (root: TreeNode | null) {
-  if (root === null) {
-    return true;
-  }
-  let res = 0;//统计深度
-  let n = 0;//统计结点个数
-  const find = function (root: TreeNode | null, depth: number) {
-    if (root === null) {
-      return;
-    }
-    n++;
-    if (root.left === null && root.right === null) {
-      res = Math.max(res, depth);
-    }
-    find(root.left, depth + 1);
-    find(root.right, depth + 1);
-  }
-  find(root,0);
-  return Math.floor(Math.log2(n))>=res;
-};
 
-export { isBalanced2 as isBalanced };
+export { isBalanced };
