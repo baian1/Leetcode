@@ -1,8 +1,15 @@
+/**
+ * 优化:
+ * 1.使用-1表示指针为空
+ * 2.使用tail表示最后一个元素
+ * 3.一轮循环规则修改
+ */
+
 interface MyCircularQueue1 {
   length: number;
   list: number[];
-  head: number | null;
-  tail: number | null;
+  head: number;
+  tail: number;
   Front(): number;
   Rear(): number;
   enQueue(value: number): boolean;
@@ -14,61 +21,65 @@ interface MyCircularQueue1 {
 class MyCircularQueue implements MyCircularQueue1 {
   length: number;
   list: number[];
-  head: number | null;
-  tail: number | null;
+  head: number;
+  tail: number;
   constructor(k: number) {
     this.length = k;
     this.list = [];
-    this.head = null;
-    this.tail = null;
+    this.head = -1;
+    this.tail = -1;
   }
+
   isFull(): boolean {
-    if (this.head === null || this.tail === null) {
-      return false;
-    }
-    if (this.head === this.tail) {
+    if((this.tail+1)%this.length===this.head){
       return true;
     }
     return false;
-  }
+  }//尾指针的下一个指针是头指针时,队列满
+
   isEmpty(): boolean {
-    if (this.head === this.tail && this.head === null) {
+    if (this.head === -1) {
       return true;
     }
     return false;
-  }
+  }//头指针不存在时,队列空
+
   Front(): number {
     if (this.isEmpty()) {
       return -1;
     }
     return this.list[<number>this.head];
   }
+
   Rear(): number {
     if (this.isEmpty()) {
       return -1;
     }
-    return this.list[<number>this.tail - 1 < 0 ? this.length - 1 : <number>this.tail - 1];
+    return this.list[this.tail];
   }
+
   enQueue(value: number): boolean {
     if (this.isFull()) {
       return false;
     }
     if (this.isEmpty()) {
-      this.head = this.tail = 0;
+      this.head = 0;
     }
-    this.list[<number>this.tail] = value;
-    this.tail = (1 + (<number>this.tail)) % this.length;
+    this.tail = (1 + this.tail) % this.length;
+    this.list[this.tail] = value;
     return true;
   }
+
   deQueue() {
     if (this.isEmpty()) {
       return false;
     }
-    this.head = (1 + (<number>this.head)) % this.length;
-    if (this.head === this.tail) {
-      this.head = this.tail = null;
+    if(this.tail===this.head){
+      this.tail=-1;
+      this.head=-1;
       return true;
     }
+    this.head = (1 + this.head) % this.length;
     return true;
   }
 }
