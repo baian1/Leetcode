@@ -1,5 +1,6 @@
 /**
  * 0/1背包问题
+ * https://blog.csdn.net/hearthougan/article/details/53869671
  */
 
 const getMaxVal = function (value: number[], heave: number[], fuzhong: number) {
