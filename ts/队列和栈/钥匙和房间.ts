@@ -10,28 +10,48 @@
  * @param {number[][]} rooms
  * @return {boolean}
  * bfs
+ * 优化:记录钥匙个数，直接和房间数比较
  */
 var canVisitAllRooms = function (rooms: number[][]): boolean {
   let hasRoomKey = Array(rooms.length).fill(false);
   hasRoomKey[0] = true;
   let keyQuene = [...rooms[0]];
+  let countkey = 1;
   while (keyQuene.length !== 0) {
     let key = <number>keyQuene.shift();
     if (hasRoomKey[key] === true) {
       continue;
     }
     hasRoomKey[key] = true;
+    countkey++;
     let getkeyslist = rooms[key];
     for (let newkey of getkeyslist) {
       keyQuene.push(newkey);
     }
   }
-  for (let flag of hasRoomKey) {
-    if (flag === false) {
-      return false;
-    }
-  }
-  return true;
+  return countkey === rooms.length;
 };
 
-export { canVisitAllRooms };
+/**
+ * @param {number[][]} rooms
+ * @return {boolean}
+ * dfs
+ */
+var canVisitAllRooms2 = function (rooms: number[][]): boolean {
+  let hasRoomKey: boolean[] = [];
+  hasRoomKey[0] = true;
+  let count = 1;
+  const dfs = function (roomkeys: number[]) {
+    for (let i of roomkeys) {
+      if (hasRoomKey[i] === undefined) {
+        hasRoomKey[i] = true;
+        count++;
+        dfs(rooms[i]);
+      }
+    }
+  }
+  dfs(rooms[0]);
+  return count === rooms.length;
+}
+
+export { canVisitAllRooms2 as canVisitAllRooms };
