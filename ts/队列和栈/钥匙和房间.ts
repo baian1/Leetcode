@@ -36,6 +36,7 @@ var canVisitAllRooms = function (rooms: number[][]): boolean {
  * @param {number[][]} rooms
  * @return {boolean}
  * dfs
+ * 进房间的时候，把钥匙改为true
  */
 var canVisitAllRooms2 = function (rooms: number[][]): boolean {
   let hasRoomKey: boolean[] = [];
