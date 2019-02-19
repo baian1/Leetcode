@@ -8,8 +8,7 @@
  * @return {string}
  */
 var addBinary = function (a: string, b: string): string {
-  let list = [];
-  let flag: boolean = false;
+  let flag = 0;
   let sum = '';
   if (a.length > b.length) {
     let temp;
@@ -21,50 +20,49 @@ var addBinary = function (a: string, b: string): string {
   const bLength = b.length - 1;
   let Index = 0;
   while (Index !== a.length) {
-    if (a[aLength - Index] === '1' && b[bLength - Index] === '1') {
-      if (flag === true) {
-        sum = '1' + sum;
-      } else {
+    const A = a[aLength - Index];
+    const B = b[bLength - Index];
+    let cur = Number(A) + Number(B) + flag;
+    switch (cur) {
+      case 0:
+        flag = 0;
         sum = '0' + sum;
-      }
-      flag = true;
-      Index++;
-      continue;
-    }//1和1
-    if (a[aLength - Index] === '1' || b[bLength - Index] === '1') {
-      if (flag === true) {
-        sum = '0' + sum;
-        flag = true;
-      } else {
+        break;
+      case 1:
+        flag = 0;
         sum = '1' + sum;
-        flag = false;
-      }
-      Index++;
-      continue;
-    }//1和0
-    if (flag === true) {
-      sum = '1' + sum;
-    } else {
-      sum = '0' + sum;
+        break;
+      case 2:
+        flag = 1;
+        sum = '0' + sum;
+        break;
+      case 3:
+        flag = 1;
+        sum = '1' + sum;
+        break;
+      default:
+        break;
     }
     Index++;
-    flag = false;//0和0
   }//先把短的部分加完
 
-  while (flag === true) {
-    if (b[bLength - Index] === '1') {
+  while (flag === 1) {
+    const B = b[bLength - Index];
+    if (B === '1') {
       sum = '0' + sum;
-      flag = true;
-    } else if (b[bLength - Index] === '0') {
-      sum = '1' + sum;
-      flag = false;
     } else {
       sum = '1' + sum;
-      return sum;
-    }//长的多出来部分
+      flag = 0;
+    }
     Index++;
+  }//额外部分相加
+
+  if (Index === b.length + 1) {
+    return sum;
+  } else {
+    return b.slice(0, bLength - Index + 1) + sum;
   }
-  return b.slice(0, bLength - Index + 1) + sum;
+
 };
 
 export { addBinary };
