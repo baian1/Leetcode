@@ -93,4 +93,38 @@ class LRUCache implements LRUCacheInterface {
   }
 }
 
-export { LRUCache };
+/**
+ * 使用linkmap实现
+ * 
+ */
+class LRUCache2 {
+  map: Map<number, number>;
+  constructor(public max: number) {
+    this.map = new Map();
+  }
+  get(key: number) {
+    let value = this.map.get(key);
+    if (!value) {
+      return -1;
+    }
+    this.map.delete(key);
+    this.map.set(key, value);
+    return value;
+  }
+
+  put(key: number, value: number) {
+    this.map.delete(key);
+    let size = this.map.size;
+    if (size >= this.max) {
+      let keys = [...this.map.keys()];
+      let i = size - this.max;//删去开头多余部分
+      for (i; i >= 0; i--) {
+        this.map.delete(keys[i]);
+      }
+    }
+    this.map.set(key, value);
+  }
+
+}
+
+export { LRUCache2 as LRUCache };
