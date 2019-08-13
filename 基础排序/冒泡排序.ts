@@ -1,8 +1,4 @@
-function swap(arr:number[],i:number,j:number){
-  let temp=arr[i]
-  arr[i]=arr[j]
-  arr[j]=temp
-}
+import { swap } from "./swap";
 
 /**
  * 冒泡排序,每次循环取到最大的数或最小的数到合适位置
