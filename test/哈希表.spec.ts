@@ -21,16 +21,4 @@ describe("hashmap",function (){
             assert.equal(map.get("a"),null,"数据清除失败");
         })
     })
-    describe.only('111',()=>{
-        it.only('111',function (){
-            this.skip();
-        })
-        it('222',()=>{
-            
-        })
-        it('333',()=>{
-            
-        })
-        it.only('444')
-    })
 })
