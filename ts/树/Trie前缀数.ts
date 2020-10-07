@@ -1,36 +1,59 @@
-/**
- * 208. 实现 Trie (前缀树)
- */
-class Trie {
-    constructor() {
-
-    }
-
-    insert(word: string): void {
-
-    }
-
-    search(word: string): boolean {
-
-    }
-
-    startsWith(prefix: string): boolean {
-
-    }
+class TrieTreeNode {
+  value: string;
+  isEnd: boolean;
+  children: { [char: string]: TrieTreeNode | undefined };
+  constructor(value: string) {
+    this.value = value;
+    this.isEnd = false;
+    this.children = {};
+  }
 }
 
 /**
- * Your Trie object will be instantiated and called as such:
- * var obj = new Trie()
- * obj.insert(word)
- * var param_2 = obj.search(word)
- * var param_3 = obj.startsWith(prefix)
+ * 208. 实现 Trie (前缀树)
  */
-let trie = new Trie();
+export class Trie {
+  root: TrieTreeNode;
+  constructor() {
+    this.root = new TrieTreeNode("");
+  }
 
-asserts(trie.insert("apple"));
-trie.search("apple");   // 返回 true
-trie.search("app");     // 返回 false
-trie.startsWith("app"); // 返回 true
-trie.insert("app");   
-trie.search("app");     // 返回 true
+  insert(word: string): void {
+    let node: TrieTreeNode | undefined = this.root;
+    for (let i = 0; i < word.length; i++) {
+      const char = word[i];
+      if (!Reflect.get(node.children, char)) {
+        const newNode = new TrieTreeNode(char);
+        node.children[char] = newNode;
+      }
+      node = node.children[char];
+      if (node === undefined) {
+        throw new Error("前缀树节点创建失败");
+      }
+      if (i === word.length - 1) {
+        node.isEnd = true;
+      }
+    }
+  }
+
+  private findEndNode(word: string) {
+    let node: TrieTreeNode | undefined = this.root;
+    for (let char of word) {
+      if (node === undefined) {
+        break;
+      }
+      node = node.children[char];
+    }
+    return node;
+  }
+
+  search(word: string): boolean {
+    const node = this.findEndNode(word);
+    return node !== undefined && node.isEnd === true;
+  }
+
+  startsWith(prefix: string): boolean {
+    const node = this.findEndNode(prefix);
+    return node !== undefined;
+  }
+}
