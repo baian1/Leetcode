@@ -1,4 +1,3 @@
-/.vscode
-/jsbuild
-/tsconfig.json
 /index.ts
+/node_modules
+/package-lock.json

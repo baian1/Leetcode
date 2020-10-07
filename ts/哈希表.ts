@@ -17,19 +17,41 @@ const HASHSIZE = 2;
  * 构建哈希表
  */
 interface hashInterface {
-  hashTab: (null | hashNode)[];
-  hash(str: string): number;//返回哈希表index
-  lookup(str: string): null | hashNode;//寻找对应index节点中符合name
-  get(str: string): string | null;//寻找哈希表中对应项
-  install(name: string, desc: string): number;//添加项
-  displayTable(): string;//展示所有项
-  clearup(): void;//清空表
+  /**
+   * 返回哈希表index
+   * @param str 
+   */
+  hash(str: string): number;
+  /**
+   * 寻找对应index节点中符合name
+   * @param str 
+   */
+  lookup(str: string): null | hashNode;
+  /**
+   * //寻找哈希表中对应项
+   * @param str 
+   */
+  get(str: string): string | null;
+  /**
+   * 添加项
+   * @param name 
+   * @param desc 
+   */
+  install(name: string, desc: string): number;
+  /**
+   * 展示所有项
+   */
+  displayTable(): string;
+  /**
+   * 清空表
+   */
+  clearup(): void;
 }
 
-class hashMap implements hashInterface {
-  hashTab: (null | hashNode)[];
+export class hashMap implements hashInterface {
+  #hashTab: (null | hashNode)[];
   constructor() {
-    this.hashTab = Array(HASHSIZE).fill(null);
+    this.#hashTab = Array(HASHSIZE).fill(null);
   }
 
   hash(str: string) {
@@ -42,7 +64,7 @@ class hashMap implements hashInterface {
 
   lookup(str: string) {
     let index = this.hash(str);
-    let node: null | hashNode = this.hashTab[index];
+    let node: null | hashNode = this.#hashTab[index];
     while (node !== null) {
       if (node.name === str) {
         return node;
@@ -69,8 +91,8 @@ class hashMap implements hashInterface {
     if (node === null) {
       let index = this.hash(name);
       let newNode = new hashNode(name, desc);
-      newNode.next = this.hashTab[index];
-      this.hashTab[index] = newNode;
+      newNode.next = this.#hashTab[index];
+      this.#hashTab[index] = newNode;
     } else {
       node.desc = desc;
     }
@@ -81,10 +103,10 @@ class hashMap implements hashInterface {
     let index = 0;
     let res = '';
     while (index < HASHSIZE) {
-      if (this.hashTab[index] === null) {
+      if (this.#hashTab[index] === null) {
         res += '()\n'
       } else {
-        let node = this.hashTab[index];
+        let node = this.#hashTab[index];
         while (node !== null) {
           res += `(${node.name},${node.desc})\n`;
           node = node.next;
@@ -92,15 +114,14 @@ class hashMap implements hashInterface {
       }
       index++;
     }
-    console.log(res);
     return res;
   }
 
   clearup() {
     let index = 0;
     for (index; index < HASHSIZE; index++) {
-      if (this.hashTab[index] !== null) {
-        this.hashTab[index] = null;
+      if (this.#hashTab[index] !== null) {
+        this.#hashTab[index] = null;
       }
     }
   }

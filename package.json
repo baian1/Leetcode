@@ -1,0 +1,29 @@
+{
+  "name": "pratice_leetcode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baian1/Leetcode.git"
+  },
+  "author": "baian1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/baian1/Leetcode/issues"
+  },
+  "homepage": "https://github.com/baian1/Leetcode#readme",
+  "devDependencies": {
+    "@types/chai": "^4.2.13",
+    "@types/mocha": "^8.0.3",
+    "@types/node": "^14.11.5",
+    "chai": "^4.2.0",
+    "mocha": "^8.1.3",
+    "ts-node": "^9.0.0",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^4.0.3"
+  }
+}
