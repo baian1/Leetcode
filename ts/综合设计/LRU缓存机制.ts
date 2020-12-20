@@ -95,7 +95,7 @@ class LRUCache implements LRUCacheInterface {
 
 /**
  * 使用linkmap实现
- * 
+ *
  */
 class LRUCache2 {
   map: Map<number, number>;
@@ -117,14 +117,93 @@ class LRUCache2 {
     let size = this.map.size;
     if (size >= this.max) {
       let keys = [...this.map.keys()];
-      let i = size - this.max;//删去开头多余部分
+      let i = size - this.max; //删去开头多余部分
       for (i; i >= 0; i--) {
         this.map.delete(keys[i]);
       }
     }
     this.map.set(key, value);
   }
+}
 
+//构造双向列表的解法
+class LRUNode3 {
+  pre: null | LRUNode3;
+  next: null | LRUNode3;
+  constructor(public key: number, public value: number) {
+    this.next = null;
+    this.pre = null;
+  }
+}
+
+export class LRUCache3 {
+  map: Map<number, LRUNode3>;
+  head: LRUNode3;
+  end: LRUNode3;
+  constructor(public max: number) {
+    this.map = new Map();
+    this.end = new LRUNode3(-1, 0);
+    this.head = new LRUNode3(-1, 0);
+    this.head.next = this.end;
+    this.end.pre = this.head;
+  }
+  private moveNodeToHead(node: LRUNode3) {
+    //取出这个节点
+    const pre = node.pre;
+    const next = node.next;
+    if (pre !== null && next !== null) {
+      pre.next = next;
+      next.pre = pre;
+    }
+
+    if (this.head.next === null) {
+      throw new Error();
+    }
+
+    //将节点添加到头部
+    node.next = this.head.next;
+    this.head.next.pre = node;
+
+    this.head.next = node;
+    node.pre = this.head;
+
+    //判断长度,删除不需要的节点
+    if (this.map.size > this.max) {
+      let needDeleteCount = this.map.size - this.max;
+      //寻找到最后一个节点
+      let node = this.end.pre;
+      while (needDeleteCount && node) {
+        this.map.delete(node.key);
+        node = node.pre;
+        needDeleteCount--;
+      }
+      if (needDeleteCount !== 0 || node === null) {
+        throw new Error();
+      }
+      node.next = this.end;
+      this.end.pre = node;
+    }
+  }
+
+  get(key: number) {
+    let node = this.map.get(key);
+    if (node === undefined) {
+      return -1;
+    }
+    this.moveNodeToHead(node);
+    return node.value;
+  }
+
+  put(key: number, value: number) {
+    let node = this.map.get(key);
+    if (node === undefined) {
+      node = new LRUNode3(key, value);
+      this.map.set(key, node);
+    } else {
+      node.value = value;
+    }
+    this.moveNodeToHead(node);
+  }
 }
 
 export { LRUCache2 as LRUCache };
