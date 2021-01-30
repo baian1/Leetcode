@@ -32,26 +32,32 @@ const permute = function (nums: number[]) {
 export const permute2 = (nums: number[]) => {
   //回溯算法
 
+  //为了减少数组拼接操作,创建一个
+  const isUsed = new Array(nums.length).fill(false);
   //优先找齐一次,然后回溯
   let resList: number[][] = [];
   let currentList: number[] = [];
+  const length = nums.length;
   const walk = () => {
+    //一条分钟走到尽头
+    if (currentList.length === length) {
+      resList.push([...currentList]);
+      return;
+    }
+
     //会对nums进行修改,所以需要记录
-    let length = nums.length;
     for (let i = 0; i < length; i++) {
-      let num = nums[i];
-      //取出数子
-      nums.splice(i, 1);
-      currentList.push(num);
-      if (nums.length === 0) {
-        resList.push([...currentList]);
-      } else {
-        //没有到尽头,继续回溯
-        walk();
+      if (isUsed[i] === true) {
+        continue;
       }
+      const num = nums[i];
+      //设为已用
+      isUsed[i] = true;
+      currentList.push(num);
+      walk();
       //分支往回走
       currentList.pop();
-      nums = [...nums.slice(0, i), num, ...nums.slice(i, nums.length)];
+      isUsed[i] = false;
     }
   };
   walk();
