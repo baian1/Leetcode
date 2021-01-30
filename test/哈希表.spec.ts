@@ -1,6 +1,6 @@
-import { assert } from "chai";
+import { assert, expect, should } from "chai";
 import { hashMap } from "@ts/哈希表";
-
+should();
 describe("hashmap", function () {
   let map = new hashMap();
   beforeEach(() => {
@@ -9,7 +9,7 @@ describe("hashmap", function () {
   it("add value", () => {
     map.install("a", "1");
     map.install("b", "2");
-    assert.equal(map.get("a"), "1", "新增数据不相等");
+    expect(map.get("a")).to.equal("1");
     assert.equal(map.get("b"), "2", "新增数据不相等");
   });
   it("clean data", () => {
