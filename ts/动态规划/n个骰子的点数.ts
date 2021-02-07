@@ -4,7 +4,11 @@ export function dicesProbability(n: number): number[] {
   for (let i = 1; i < n; i++) {
     dp[i] = [];
     for (let j = 0; j < n * 6; j++) {
-      if (j === 0) {
+      //第一行 1 1 1 1 1 1
+      //第二行 0 1
+      //第三行 0 0 1
+      //第四行 0 0 0 1
+      if (i > j) {
         dp[i][j] = 0;
         continue;
       }
