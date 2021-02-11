@@ -10,11 +10,13 @@
             "name": "Mocha Tests",
             "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
             "args": [
-                "-r","ts-node/register",
-                "-r", "tsconfig-paths/register",
                 "--colors", "--recursive",
                 "--no-timeout",
                 "${file}",
+            ],
+            "runtimeArgs": [
+                "-r","ts-node/register",
+                "-r", "tsconfig-paths/register",
             ],
             "attachSimplePort": 0,
             "cwd": "${workspaceRoot}",
