@@ -25,14 +25,23 @@ function minStickers(stickers: string[], target: string): number {
     for (const [sticker, chars] of stickerChar.entries()) {
       const charsClone = [...chars];
       let next = i;
+      //遍历过程中,有单词ab 与 单词 bc
+      //先使用 ab 或 先使用 bc
+      //最终结果时一样的
+      //所以从左侧非0开始,不是左侧第零位开始的词组跳过
+      let isFirstNotEmptyChar = true;
       for (let j = 0; j < target.length; j++) {
         if (next & (1 << j)) {
           continue;
         }
         const charCode = target[j].charCodeAt(0) - 97;
+        if (isFirstNotEmptyChar && charsClone[charCode] === 0) {
+          break;
+        }
         if (charsClone[charCode] > 0) {
           next += 1 << j;
           charsClone[charCode] = charsClone[charCode] - 1;
+          isFirstNotEmptyChar = false;
         }
       }
       dp[next] = Math.min(dp[next], dp[i] + 1);
