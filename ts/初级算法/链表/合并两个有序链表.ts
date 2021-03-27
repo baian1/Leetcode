@@ -1,15 +1,5 @@
-/**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
-class ListNode {
-  constructor(public val: number, public next: ListNode | null = null) {
+import { ListNode } from "@ts/中级算法/链表/NodeList";
 
-  }
-}
 /**
  * @param {ListNode} l1
  * @param {ListNode} l2
@@ -60,3 +50,5 @@ var mergeTwoLists2 = function (l1: ListNode | null, l2: ListNode | null) {
   cur.next = wei;
   return head;
 };
+
+export { mergeTwoLists, mergeTwoLists2 };
