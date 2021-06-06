@@ -5,8 +5,36 @@
  * @param n 1个数
  */
 function findMaxForm(strs: string[], m: number, n: number): number {
-  //1. 将strs转为0/1的数组
-  const strsWithZeroAndOne: [zero: number, one: number][] = strs.map((str) => {
+  //1. 构造空的dp
+  const dp: number[][] = [];
+  for (let i = 0; i <= m; i++) {
+    dp[i] = [];
+    for (let j = 0; j <= n; j++) {
+      dp[i][j] = 0;
+    }
+  }
+
+  for (let str of strs) {
+    const [zero, one] = getZeroAndOne(str);
+    for (let i = m; i >= zero; i--) {
+      for (let j = n; j >= one; j--) {
+        //获取该 m,n 下，上一次的最大值
+        let max = dp[i][j];
+
+        if (i >= zero && j >= one) {
+          //选择当前的元素后的最大可能性
+          let newMax = dp[i - zero][j - one];
+          //加上当前元素
+          newMax++;
+          max = Math.max(newMax, max);
+        }
+        dp[i][j] = max;
+      }
+    }
+  }
+  return dp[m][n];
+
+  function getZeroAndOne(str: string) {
     const res: [number, number] = [0, 0];
     for (let num of str) {
       if (num === "0") {
@@ -16,40 +44,7 @@ function findMaxForm(strs: string[], m: number, n: number): number {
       }
     }
     return res;
-  });
-  //2. 构造空的dp
-  const dp: number[][][] = [];
-  for (let l = 0; l < strs.length; l++) {
-    let data = [];
-    for (let i = 0; i <= m; i++) {
-      let data2 = [];
-      for (let j = 0; j <= n; j++) {
-        data2.push(0);
-      }
-      data.push(data2);
-    }
-    dp.push(data);
   }
-
-  for (let l = 0; l < strs.length; l++) {
-    const [zero, one] = strsWithZeroAndOne[l];
-    for (let i = 0; i <= m; i++) {
-      for (let j = 0; j <= n; j++) {
-        //获取该 m,n 下，上一次的最大值
-        let max = dp[l - 1]?.[i]?.[j] ?? 0;
-
-        if (i >= zero && j >= one) {
-          //选择当前的元素后的最大可能性
-          let newMax = dp[l - 1]?.[i - zero]?.[j - one] ?? 0;
-          //加上当前元素
-          newMax++;
-          max = Math.max(newMax, max);
-        }
-        dp[l][i][j] = max;
-      }
-    }
-  }
-  return dp[strs.length - 1][m][n];
 }
 
 export { findMaxForm };
