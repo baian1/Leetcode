@@ -1,5 +1,3 @@
-use std::{collections::HashMap, convert::TryInto, slice::SliceIndex};
-
 struct Solution();
 
 impl Solution {
@@ -9,7 +7,6 @@ impl Solution {
         for (index, char) in s_bytes.iter().enumerate() {
             char_map[(char - 97) as usize] = index as i32;
         }
-        s.bytes().enumerate().for_each(||||)
         let mut start = 0;
         let mut end = 0;
         let mut res = Vec::new();
@@ -25,5 +22,16 @@ impl Solution {
         }
 
         res
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    // Note this useful idiom: importing names from outer (for mod tests) scope.
+    use super::*;
+
+    #[test]
+    fn test_1() {
+        assert_eq!(Solution::partition_labels("aabb".to_string()), vec![2, 2]);
     }
 }

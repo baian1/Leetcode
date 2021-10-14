@@ -26,26 +26,26 @@ mod tests {
     // Note this useful idiom: importing names from outer (for mod tests) scope.
     use super::*;
 
-    macro_rules! suzutoaoo {
+    macro_rules! vvv {
         ($a:expr) => {
-            Solution::number_of_weak_characters(Vec::from($a.map(|v| Vec::from(v))))
+            Solution::number_of_weak_characters(crate::arr_to_vec!($a))
         };
     }
 
     #[test]
     fn test_1() {
-        assert_eq!(suzutoaoo!([[5, 5], [6, 3], [3, 6]]), 0);
+        assert_eq!(vvv!([[5, 5], [6, 3], [3, 6]]), 0);
     }
 
     #[test]
     fn test_2() {
-        assert_eq!(suzutoaoo!([[5, 5], [6, 3], [3, 6]]), 0);
+        assert_eq!(vvv!([[5, 5], [6, 3], [3, 6]]), 0);
     }
 
     #[test]
     fn test_3() {
         assert_eq!(
-            suzutoaoo!([
+            vvv!([
                 [7, 7],
                 [1, 2],
                 [9, 7],
