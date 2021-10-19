@@ -10,7 +10,7 @@ impl Solution {
                 break;
             }
         }
-
+        dbg!(!2);
         return dbg!((2 as i32).pow(count)) - num - 1;
     }
 }
