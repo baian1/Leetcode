@@ -5,23 +5,16 @@ impl Solution {
     pub fn majority_element(nums: Vec<i32>) -> Vec<i32> {
         let mut hash_map = HashMap::new();
         for num in nums.iter() {
-            let count = hash_map.get_mut(num);
-            match count {
-                Some(v) => {
-                    *v = *v + 1;
-                }
-                None => {
-                    hash_map.insert(*num, 1);
-                }
-            }
+            let count = hash_map.entry(num).or_insert(0);
+            *count += 1;
         }
-        let mut res = vec![];
+
         let max_bound = (nums.len() / 3) as i32;
-        for (k, num) in hash_map.iter() {
-            if *num > max_bound {
-                res.push(*k)
-            }
-        }
+        let res = hash_map
+            .iter()
+            .filter_map(|(k, v)| if *v > max_bound { Some(**k) } else { None })
+            .collect();
+
         res
     }
 }
