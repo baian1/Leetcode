@@ -1,33 +1,9 @@
-use std::ops::Add;
-
-#[derive(Debug)]
-struct Complex<T: Add> {
-    real: T,
-    imag: T,
-}
-
-impl<T> Add for Complex<T>
-where
-    T: Add<Output = T>,
-{
-    type Output = Complex<T>;
-    fn add(self, rhs: Self) -> Self::Output {
-        Complex {
-            real: self.real + rhs.real,
-            imag: self.imag + rhs.imag,
-        }
-    }
-}
+use std::collections::HashMap;
 
 fn main() {
-    dbg!(
-        Complex {
-            real: (1, 2),
-            imag: (2, 1)
-        } + Complex {
-            real: (1, 1),
-            imag: (1, 2)
-        }
-    );
+    let mut hash = HashMap::new();
+    hash.insert(vec![1, 2], 3);
+    hash.insert(vec![1, 2], 4);
+    dbg!(hash);
     println!("Hello, world!");
 }
