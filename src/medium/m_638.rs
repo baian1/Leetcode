@@ -1,8 +1,9 @@
-use std::{borrow::Borrow, collections::HashMap, ops::Add};
+use std::collections::HashMap;
 
 struct Solution();
 impl Solution {
     pub fn shopping_offers(price: Vec<i32>, special: Vec<Vec<i32>>, needs: Vec<i32>) -> i32 {
+        //过滤不需要的礼包
         let new_special: Vec<Vec<i32>> = special
             .into_iter()
             .filter(|special| {
@@ -20,7 +21,6 @@ impl Solution {
                 }
                 true
             })
-            // .map(|v| v.clone())
             .clone()
             .collect();
 
@@ -31,31 +31,32 @@ impl Solution {
             needs: Vec<i32>,
             memo: &mut HashMap<Vec<i32>, i32>,
         ) -> i32 {
-            let mut min_price = 0;
+            //有记录，直接返回
             if let Some(min_price) = memo.get(&needs) {
                 return min_price.clone();
             }
-            //全部使用price来获取
-            for (index, count) in needs.iter().enumerate() {
-                min_price += price[index] * count
-            }
+            //直接买的最高价格
+            let mut min_price: i32 = needs
+                .iter()
+                .enumerate()
+                .map(|(index, count)| price[index] * count)
+                .sum();
+
             for s in new_special {
                 //购买一个个礼包的分支
-                let mut next_needs = needs.clone();
-                let mut index = 0;
-                let next_needs: Option<Vec<i32>> = loop {
-                    let count = s[index];
-                    if count > needs[index] {
-                        break None;
-                    }
-                    next_needs[index] -= count;
-                    index += 1;
-                    if index >= needs.len() {
-                        break Some(next_needs);
-                    }
-                };
+                let next_needs = needs
+                    .iter()
+                    .enumerate()
+                    .map(|(index, count)| {
+                        let next_count = count - s[index];
+                        if next_count >= 0 {
+                            return Ok(next_count);
+                        }
+                        Err("礼包超限制")
+                    })
+                    .collect();
 
-                if let Some(next_needs) = next_needs {
+                if let Ok(next_needs) = next_needs {
                     let special_price = s[s.len() - 1]; //礼包价格
                     min_price =
                         min_price.min(dfs(price, new_special, next_needs, memo) + special_price);
