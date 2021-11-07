@@ -1,5 +1,3 @@
-use std::collections::HashSet;
-
 struct Solution();
 impl Solution {
     fn count(mut n: usize) -> [u8; 10] {
