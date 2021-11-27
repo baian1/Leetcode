@@ -1,5 +1,12 @@
-use std::collections::HashMap;
+#[derive(Debug)]
+struct Err();
 
-fn main() {
-    dbg!("11".to_owned() + "22");
+fn main() -> Result<(), Err> {
+    fn tt() -> Result<i32, Err> {
+        return Ok(3);
+    }
+
+    let a = tt()?;
+    dbg!(a);
+    Ok(())
 }
