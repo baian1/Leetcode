@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-struct Solution();
+pub struct Solution();
 impl Solution {
     pub fn shopping_offers(price: Vec<i32>, special: Vec<Vec<i32>>, needs: Vec<i32>) -> i32 {
         //过滤不需要的礼包

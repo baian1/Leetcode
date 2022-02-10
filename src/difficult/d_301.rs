@@ -1,6 +1,6 @@
 use std::convert::TryInto;
 
-struct Solution();
+pub struct Solution();
 impl Solution {
     pub fn remove_invalid_parentheses(s: String) -> Vec<String> {
         let mut res: Vec<String> = vec![];

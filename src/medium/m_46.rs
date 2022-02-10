@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-struct Solution();
+pub struct Solution();
 impl Solution {
     pub fn permute(nums: Vec<i32>) -> Vec<Vec<i32>> {
         let mut res: Vec<Vec<i32>> = vec![];

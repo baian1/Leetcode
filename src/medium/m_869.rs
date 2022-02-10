@@ -1,4 +1,4 @@
-struct Solution();
+pub struct Solution();
 impl Solution {
     fn count(mut n: usize) -> [u8; 10] {
         let mut ret = [0; 10];

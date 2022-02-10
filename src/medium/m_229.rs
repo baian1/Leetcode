@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-struct Solution();
+pub struct Solution();
 impl Solution {
     pub fn majority_element(nums: Vec<i32>) -> Vec<i32> {
         let mut hash_map = HashMap::new();
