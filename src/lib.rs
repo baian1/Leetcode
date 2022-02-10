@@ -1,3 +1,4 @@
+pub mod codewars;
 pub mod difficult;
 pub mod easy;
 pub mod medium;
