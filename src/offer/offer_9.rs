@@ -1,4 +1,4 @@
-struct CQueue {
+pub struct CQueue {
     stack: Vec<i32>,
     stack2: Vec<i32>,
 }
@@ -8,18 +8,18 @@ struct CQueue {
  * If you need a mutable reference, change it to `&mut self` instead.
  */
 impl CQueue {
-    fn new() -> Self {
+    pub fn new() -> Self {
         CQueue {
             stack: vec![],
             stack2: vec![],
         }
     }
 
-    fn append_tail(&mut self, value: i32) {
+    pub fn append_tail(&mut self, value: i32) {
         self.stack.push(value)
     }
 
-    fn delete_head(&mut self) -> i32 {
+    pub fn delete_head(&mut self) -> i32 {
         if let Some(r) = self.stack2.pop() {
             return r;
         }
