@@ -52,14 +52,18 @@ impl MinStack {
     }
 }
 
-#[test]
-fn one() {
-    let mut obj = MinStack::new();
-    obj.push(-2);
-    obj.push(0);
-    obj.push(-3);
-    assert_eq!(obj.min(), -3);
-    obj.pop();
-    assert_eq!(obj.top(), 0);
-    assert_eq!(obj.min(), -2);
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn one() {
+        let mut obj = MinStack::new();
+        obj.push(-2);
+        obj.push(0);
+        obj.push(-3);
+        assert_eq!(obj.min(), -3);
+        obj.pop();
+        assert_eq!(obj.top(), 0);
+        assert_eq!(obj.min(), -2);
+    }
 }
