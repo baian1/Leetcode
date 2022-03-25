@@ -1,4 +1,4 @@
-class TreeNode<T extends number | string> {
+class TreeNode<T extends number | string = number> {
   value: T;
   left: TreeNode<T> | null;
   right: TreeNode<T> | null;
@@ -11,9 +11,9 @@ class TreeNode<T extends number | string> {
   }
 }
 
-function initTree<T extends number | string>(
-  arr: (T | null)[]
-): TreeNode<T> | null {
+function initTree<T extends number | string, P extends (T | null)[] = T[]>(
+  arr: P
+): P["length"] extends 0 ? null : TreeNode<T> {
   //所有节点转换成TreeNode节点
   let nodelist: (TreeNode<T> | null)[] = [];
   let length = arr.length;
@@ -40,7 +40,8 @@ function initTree<T extends number | string>(
       }
     }
   }
-  return nodelist[0];
+
+  return (nodelist[0] ?? null) as any;
 }
 
 export { TreeNode, initTree };
