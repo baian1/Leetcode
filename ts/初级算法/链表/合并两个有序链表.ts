@@ -1,4 +1,4 @@
-import { ListNode } from "@ts/中级算法/链表/NodeList";
+import { ListNode } from "@ts/链表/NodeList";
 
 /**
  * @param {ListNode} l1

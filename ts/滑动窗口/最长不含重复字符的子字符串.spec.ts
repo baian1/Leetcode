@@ -22,9 +22,11 @@ function lengthOfLongestSubstring(s: string): number {
 it("最长不含重复字符的子字符串", () => {
   expect(lengthOfLongestSubstring("abcabcbb")).equal(3);
 });
+
 it("最长不含重复字符的子字符串2", () => {
   expect(lengthOfLongestSubstring(" ")).equal(1);
 });
+
 it("最长不含重复字符的子字符串3", () => {
   expect(lengthOfLongestSubstring("abba")).equal(2);
 });
