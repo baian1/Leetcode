@@ -50,3 +50,11 @@ export function initTree<
 
   return (nodelist[0] ?? null) as any;
 }
+
+export function max(...params: number[]) {
+  let max = 0;
+  for (let num of params) {
+    max = Math.max(max, num);
+  }
+  return max;
+}
