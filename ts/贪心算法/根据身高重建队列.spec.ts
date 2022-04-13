@@ -10,6 +10,8 @@ import { describe, it } from "mocha";
  * @param peoples
  * @returns
  */
+
+//按照 前位数,身高 排序
 function reconstructQueue(peoples: number[][]): number[][] {
   let res = new Array();
   let peoplesSort = peoples.sort((a, b) => {
@@ -33,10 +35,34 @@ function reconstructQueue(peoples: number[][]): number[][] {
   }
   return res;
 }
+
+// 按照 身高,前位数 排序
+function reconstructQueue2(peoples: number[][]): number[][] {
+  // 身高 高->低
+  // 位数 低->高
+  let peoplesSort = peoples.sort((a, b) => {
+    if (a[0] === b[0]) {
+      return a[1] - b[1];
+    }
+    return b[0] - a[0];
+  });
+
+  let res = new Array();
+  // 根据前面人数 k,陆续插入数组
+  for (let p of peoplesSort) {
+    if (res.length <= p[1]) {
+      res.push(p);
+    } else if (res.length > p[1]) {
+      res.splice(p[1], 0, p);
+    }
+  }
+  return res;
+}
+
 describe("根据身高重建队列", () => {
   it("1", () => {
     expect(
-      reconstructQueue([
+      reconstructQueue2([
         [7, 0],
         [4, 4],
         [7, 1],
