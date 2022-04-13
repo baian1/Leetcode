@@ -11,31 +11,25 @@ import { describe, it } from "mocha";
  * @returns
  */
 function reconstructQueue(peoples: number[][]): number[][] {
-  // 前的人数 升高数组
-  let map = new Map<number, number[]>();
   let res = new Array();
-
-  // 统计
-  for (let [h, k] of peoples) {
-    let arr = map.get(k) || [];
-    arr.push(h);
-    map.set(k, arr);
-  }
-
-  // 根据前面人数 k,陆续插入数组
-  for (let [k, hs] of Array.from(map.entries()).sort((a, b) => a[0] - b[0])) {
-    for (let h of hs.sort()) {
-      let curK = k;
-      let i = 0;
-      while (curK !== -1 && res[i]) {
-        if (res[i][0] >= h) {
-          curK--;
-        }
-        i++;
-      }
-
-      res.splice(i - Math.abs(curK), 0, [h, k]);
+  let peoplesSort = peoples.sort((a, b) => {
+    if (a[1] === b[1]) {
+      return a[0] - b[0];
     }
+    return a[1] - b[1];
+  });
+  // 根据前面人数 k,陆续插入数组
+  for (let [h, k] of peoplesSort) {
+    let curK = k;
+    let i = 0;
+    while (curK !== -1 && res[i]) {
+      if (res[i][0] >= h) {
+        curK--;
+      }
+      i++;
+    }
+
+    res.splice(i - Math.abs(curK), 0, [h, k]);
   }
   return res;
 }
