@@ -16,7 +16,7 @@ import { TreeNode } from "./构建二叉树";
  */
 var levelOrder = function (root: TreeNode) {
   let list: TreeNode[] = [];
-  let res: (number | string)[][] = []
+  let res: (number | string)[][] = [];
   if (root) {
     list.push(root);
   }
@@ -24,7 +24,7 @@ var levelOrder = function (root: TreeNode) {
     let newList: TreeNode[] = [];
     let arr: (number | string)[] = [];
     for (let item of list) {
-      arr.push(item.value);
+      arr.push(item.val);
       if (item.left !== null) {
         newList.push(item.left);
       }

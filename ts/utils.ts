@@ -5,12 +5,12 @@ export function swap(arr: unknown[], i: number, j: number) {
 }
 
 export class TreeNode<T extends number | string = number> {
-  value: T;
+  val: T;
   left: TreeNode<T> | null;
   right: TreeNode<T> | null;
   next: TreeNode<T> | null;
   constructor(value: T) {
-    this.value = value;
+    this.val = value;
     this.left = null;
     this.right = null;
     this.next = null;

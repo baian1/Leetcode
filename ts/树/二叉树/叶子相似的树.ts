@@ -25,7 +25,7 @@ export function leafSimilar(
       return;
     }
     if (root.left === null && root.right === null) {
-      seq.push(root.value);
+      seq.push(root.val);
     }
     dfs(root.left, seq);
     dfs(root.right, seq);

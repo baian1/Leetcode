@@ -16,9 +16,9 @@ import { TreeNode } from "../二叉树/构建二叉树";
 var searchBST = function (root: TreeNode | null, val: number): TreeNode | null {
   let node: TreeNode | null = root;
   while (node) {
-    if (node.value > val) {
-      node = node.left
-    } else if (node.value === val) {
+    if (node.val > val) {
+      node = node.left;
+    } else if (node.val === val) {
       return node;
     } else {
       node = node.right;
@@ -33,20 +33,23 @@ var searchBST = function (root: TreeNode | null, val: number): TreeNode | null {
  * @return {TreeNode}
  * 递归
  */
-var searchBST2 = function (root: TreeNode | null, val: number): TreeNode | null {
+var searchBST2 = function (
+  root: TreeNode | null,
+  val: number
+): TreeNode | null {
   let node: TreeNode | null = root;
   const dfs = function (node: TreeNode | null, val: number): TreeNode | null {
     if (node === null) {
       return null;
     }
-    if (node.value > val) {
-      return dfs(node.left, val)
-    } else if (node.value === val) {
+    if (node.val > val) {
+      return dfs(node.left, val);
+    } else if (node.val === val) {
       return node;
     } else {
       return dfs(node.right, val);
     }
-  }
+  };
   return dfs(node, val);
 };
 

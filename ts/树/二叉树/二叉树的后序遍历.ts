@@ -17,9 +17,9 @@ var postorderTraversal = function (root: TreeNode) {
     if (root !== null) {
       findNode(root.left);
       findNode(root.right);
-      arr.push(root.value);
+      arr.push(root.val);
     }
-  }
+  };
   findNode(root);
   return arr;
 };
@@ -33,7 +33,7 @@ var postorderTraversal = function (root: TreeNode) {
 var postorderTraversal2 = function (root: TreeNode) {
   let arr: (number | string)[] = [];
   let list: TreeNode[] = [];
-  let preList: TreeNode[] = [];//存储被用过的根结点
+  let preList: TreeNode[] = []; //存储被用过的根结点
   let node: TreeNode | null = root;
 
   while (node || list.length !== 0) {
@@ -42,16 +42,19 @@ var postorderTraversal2 = function (root: TreeNode) {
       node = node.left;
     }
     if (list.length !== 0) {
-      while (preList[preList.length - 1] === list[list.length - 1] && preList.length !== 0) {
+      while (
+        preList[preList.length - 1] === list[list.length - 1] &&
+        preList.length !== 0
+      ) {
         let current = <TreeNode>preList.pop();
         list.pop();
-        arr.push(current.value);
-      }//假如根结点是已经被遍历过的，那就丢出来
+        arr.push(current.val);
+      } //假如根结点是已经被遍历过的，那就丢出来
       if (list.length === 0) {
         break;
       }
-      node = list[list.length - 1].right;//在遍历完左子树，需要开始遍历右子树
-      preList.push(list[list.length - 1]);//记录这个根结点已经被遍历
+      node = list[list.length - 1].right; //在遍历完左子树，需要开始遍历右子树
+      preList.push(list[list.length - 1]); //记录这个根结点已经被遍历
     }
   }
   return arr;
@@ -66,20 +69,20 @@ var postorderTraversal3 = function (root: TreeNode) {
   let arr: (number | string)[] = [];
   let list: TreeNode[] = [];
   let node: TreeNode | null = root;
-  let last: TreeNode | null = null;//标志位记录
+  let last: TreeNode | null = null; //标志位记录
   while (node || list.length !== 0) {
     while (node) {
       list.push(node);
       node = node.left;
     }
-    node = list[list.length - 1];//向左查询的最后一个结点，表示当前结点
+    node = list[list.length - 1]; //向左查询的最后一个结点，表示当前结点
     if (node.right === null || node.right === last) {
-      arr.push(node.value);
+      arr.push(node.val);
       list.pop();
-      last = node;//用来记录右节点会不会被查询过
+      last = node; //用来记录右节点会不会被查询过
       node = null;
     } else {
-      node = node.right;//如果有右节点存在，并且没被查询过，那就转向查右子树
+      node = node.right; //如果有右节点存在，并且没被查询过，那就转向查右子树
     }
   }
   return arr;

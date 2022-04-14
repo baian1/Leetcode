@@ -37,7 +37,7 @@ var isSymmetric = function (root: TreeNode): boolean {
       return false;
     }
     if (left !== null && right !== null) {
-      if (left.value !== right.value) {
+      if (left.val !== right.val) {
         return false;
       }
       if (dfs(left.left, right.right) === false) {
@@ -84,7 +84,7 @@ var isSymmetric2 = function (root: TreeNode): boolean {
     if (left === null && right === null) {
       left = <TreeNode>leftStack.pop();
       right = <TreeNode>rightStack.pop();
-      if (left.value !== right.value) {
+      if (left.val !== right.val) {
         state = false;
         break;
       } //节点值不同，判断不对称
@@ -107,7 +107,7 @@ export function isSymmetric3(root: TreeNode | null): boolean {
     if (!left || !right) {
       return false;
     }
-    if (left.value === right.value) {
+    if (left.val === right.val) {
       return (
         l_2_r_same(left.left, right.right) && l_2_r_same(left.right, right.left)
       );

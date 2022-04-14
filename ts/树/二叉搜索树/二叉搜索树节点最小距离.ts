@@ -9,7 +9,7 @@ export function minDiffInBST(root: TreeNode<number> | null): number {
       return;
     }
     walk(node.left);
-    list.push(node.value);
+    list.push(node.val);
     walk(node.right);
   }
   walk(root);

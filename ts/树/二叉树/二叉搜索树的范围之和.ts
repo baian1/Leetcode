@@ -7,13 +7,13 @@ function rangeSumBST(root: TreeNode | null, low: number, high: number): number {
     return 0;
   }
 
-  if (root.value > high) {
+  if (root.val > high) {
     return rangeSumBST(root.left, low, high);
-  } else if (root.value < low) {
+  } else if (root.val < low) {
     return rangeSumBST(root.right, low, high);
   } else {
     return (
-      root.value +
+      root.val +
       rangeSumBST(root.left, low, high) +
       rangeSumBST(root.right, low, high)
     );

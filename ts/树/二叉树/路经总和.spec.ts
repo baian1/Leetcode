@@ -28,8 +28,8 @@ function pathSum(root: TreeNode | null, targetSum: number): number {
     if (root === null) {
       return 0;
     }
-    const val = root.value;
-    if (root.value === targetSum) {
+    const val = root.val;
+    if (root.val === targetSum) {
       ret++;
     }
     ret += dfs(root.left, targetSum - val);
@@ -68,7 +68,7 @@ function pathSum2(root: TreeNode | null, targetSum: number): number {
     }
 
     // 添加当前节点
-    let sum = curSum + root.value;
+    let sum = curSum + root.val;
 
     // 获取前缀和，有几条符合就加几条
     ret += prefixSumCount.get(sum - targetSum) || 0;

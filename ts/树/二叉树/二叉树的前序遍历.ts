@@ -16,11 +16,11 @@ var preorderTraversal = function (root: TreeNode) {
   let arr: (number | string)[] = [];
   const findNode = function (root: TreeNode | null): void {
     if (root !== null) {
-      arr.push(root.value);
+      arr.push(root.val);
       findNode(root.left);
       findNode(root.right);
     }
-  }
+  };
   findNode(root);
   return arr;
 };
@@ -38,7 +38,7 @@ var preorderTraversal2 = function (root: TreeNode) {
   while (node || list.length !== 0) {
     while (node) {
       list.push(node);
-      arr.push(node.value);
+      arr.push(node.val);
       node = node.left;
     }
     if (list.length !== 0) {

@@ -17,10 +17,10 @@ var inorderTraversal = function (root: TreeNode) {
   const findNode = function (root: TreeNode | null): void {
     if (root !== null) {
       findNode(root.left);
-      arr.push(root.value);
+      arr.push(root.val);
       findNode(root.right);
     }
-  }
+  };
   findNode(root);
   return arr;
 };
@@ -42,7 +42,7 @@ var inorderTraversal2 = function (root: TreeNode) {
     }
     if (list.length !== 0) {
       node = <TreeNode>list.pop();
-      arr.push(node.value);
+      arr.push(node.val);
       node = node.right;
     }
   }
