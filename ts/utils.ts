@@ -32,20 +32,21 @@ export function initTree<
     }
   }
 
-  //遍历节点数组，构造搜索二叉树
-  for (let i = 0; i < nodelist.length; i++) {
-    let curNode = nodelist[i];
-    if (curNode instanceof TreeNode) {
-      let node = curNode;
-      let left = 2 * i + 1;
-      let right = 2 * i + 2;
-      if (left < length) {
-        node.left = nodelist[left];
-      }
-      if (right < length) {
-        node.right = nodelist[right];
-      }
+  let parentNodeI = 0;
+  let nodeI = 1;
+  while (nodeI < length) {
+    let parentNode = nodelist[parentNodeI];
+    if (parentNode === null) {
+      parentNodeI++;
+      continue;
     }
+    let leftNode = nodelist[nodeI] || null;
+    let rightNode = nodelist[nodeI + 1] || null;
+
+    parentNode.left = leftNode;
+    parentNode.right = rightNode;
+    parentNodeI++;
+    nodeI += 2;
   }
 
   return (nodelist[0] ?? null) as any;
