@@ -88,3 +88,16 @@ export class ListNode {
     return head;
   }
 }
+
+export function memoryFn<T extends unknown[], R>(cb: (...params: T) => R) {
+  let map: Map<string, R> = new Map();
+  return (...params: T) => {
+    let key = JSON.stringify(params);
+    let resValue = map.get(key);
+    if (!resValue) {
+      resValue = cb(...params);
+      map.set(key, resValue);
+    }
+    return resValue;
+  };
+}
