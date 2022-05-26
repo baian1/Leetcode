@@ -15,6 +15,8 @@ export class TreeNode<T extends number | string = number> {
     this.right = null;
     this.next = null;
   }
+
+  static newTree = initTree;
 }
 
 export function initTree<
