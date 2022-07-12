@@ -5,26 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Program",
-            "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-            "request": "launch",
-            "args": [
-                "${file}"
-            ],
-            "runtimeArgs": [
-                "exec",
-                "--using=v16.7.0",
-                "--",
-                "node",
-                "-r","ts-node/register",
-            ],
-            "runtimeExecutable": "C:\\Users\\雾月\\.cargo\\bin\\fnm.exe",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "type": "pwa-node"
-        },
-        {
             "type": "pwa-node",
             "request": "launch",
             "name": "Mocha Tests",
@@ -44,7 +24,7 @@
             ],
             "attachSimplePort": 0,
             "cwd": "${workspaceRoot}",
-            "runtimeExecutable": "C:\\Users\\雾月\\.cargo\\bin\\fnm.exe",
+            "runtimeExecutable": "C:\\Users\\雾月\\scoop\\shims\\fnm.exe",
             "env": {
                 "NODE_ENV": "testing",
             }
