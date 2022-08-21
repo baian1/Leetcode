@@ -1,4 +1,4 @@
-use std::{borrow::BorrowMut, cell::RefCell, ops::Deref, rc::Rc};
+use std::{cell::RefCell, ops::Deref, rc::Rc};
 
 #[macro_export]
 macro_rules! arr_to_vec {
@@ -24,7 +24,7 @@ impl TreeNode {
         }
     }
 
-    pub fn new_tree(val: Vec<Option<i32>>) -> Option<Self> {
+    pub fn new_tree(val: Vec<Option<i32>>) -> Option<Rc<RefCell<Self>>> {
         let mut node_list: Vec<Option<Rc<RefCell<TreeNode>>>> = vec![];
         for i in val.iter() {
             if let Some(num) = i {
@@ -48,9 +48,7 @@ impl TreeNode {
             });
         }
 
-        node_list
-            .remove(0)
-            .map(|node| Rc::try_unwrap(node).unwrap().replace(TreeNode::new(0)))
+        node_list.remove(0).map(|node| node)
     }
 }
 
@@ -66,7 +64,13 @@ mod tests {
             .collect();
         println!("{:?}", &data);
         let node = TreeNode::new_tree(data).unwrap();
-        assert_eq!(node.val, 1);
-        assert_eq!(node.left.map(|node| node.as_ref().borrow().val), Some(2));
+        assert_eq!(node.borrow().val, 1);
+        assert_eq!(
+            node.borrow()
+                .left
+                .as_ref()
+                .map(|node| node.as_ref().borrow().val),
+            Some(2)
+        );
     }
 }
