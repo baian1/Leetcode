@@ -3,5 +3,6 @@
         "skipFiles": [
             "<node_internals>/**"
         ]
-    }
+    },
+    "typescript.tsdk": "node_modules\\typescript\\lib"
 }
