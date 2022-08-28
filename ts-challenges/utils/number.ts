@@ -1,0 +1,2 @@
+export type AddOne<T extends number> = [...N2Arr<T>, unknown]['length'] extends infer A extends number ? A : never
+type N2Arr<T, arr extends unknown[] = []> = arr['length'] extends T ? arr : N2Arr<T, [...arr, unknown]>
